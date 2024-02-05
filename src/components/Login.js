@@ -1,64 +1,72 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import '../assets/styles/login.css';
-import loginBg from '../assets/images/login-bg.png';
+import backgroundImg from '../assets/images/login-bg.png';
 
 const Login = () => {
     const [loginForm, setLoginForm] = useState({
-        userName: 'admin',
+        userName: '',
         passWord: '',
-        remember: false,
+        dragSuccess: false, // 用于模拟拖拽验证是否成功
     });
-    const [loading, setLoading] = useState(false);
-    const [isShowSliderVerify, setIsShowSliderVerify] = useState(false);
-    const [passwordType, setPasswordType] = useState('password');
 
-    const handleLogin = () => {
-        // 登录处理逻辑
-        console.log('Handle login logic here');
+    const handleInputChange = (e) => {
+        const {name, value} = e.target;
+        setLoginForm({
+            ...loginForm,
+            [name]: value,
+        });
     };
 
-    const showPwd = () => {
-        setPasswordType(passwordType === 'password' ? 'text' : 'password');
+    const handleLogin = (e) => {
+        e.preventDefault();
+        if (loginForm.dragSuccess) {
+            // 处理登录逻辑
+            console.log('Login Success:', loginForm);
+        } else {
+            alert('Please complete the captcha verification!');
+        }
+    };
+
+    const handleCaptchaSuccess = () => {
+        // 模拟拖拽验证码验证成功
+        setLoginForm({
+            ...loginForm,
+            dragSuccess: true,
+        });
     };
 
     return (
-        <div className="view-box">
-            <div className="bg-fox">
-                <img src={loginBg} style={{ position: 'absolute', bottom: '8vh', left: '8vw', width: '450px' }} alt="Background" />
-                {/* 三角形等装饰 */}
-            </div>
-            <div className="for-box">
-                <div className="login-box">
-                    <div className="from-box from-box-show">
-                        <h3 className="from-title">Pandora management</h3>
-                        <form>
-                            <div className="el-form-item">
-                                <input
-                                    type="text"
-                                    value={loginForm.userName}
-                                    onChange={e => setLoginForm({ ...loginForm, userName: e.target.value })}
-                                    placeholder="Please enter user name"
-                                />
-                            </div>
-                            <div className="el-form-item">
-                                <input
-                                    type={passwordType}
-                                    value={loginForm.passWord}
-                                    onChange={e => setLoginForm({ ...loginForm, passWord: e.target.value })}
-                                    placeholder="Please enter password"
-                                />
-                                <button onClick={showPwd}>Show/Hide Password</button>
-                            </div>
-                            <div className="el-form-item">
-                                <button onClick={handleLogin}>Log in</button>
-                            </div>
-                        </form>
-                    </div>
+        <div className="login-container" style={{backgroundImage: `url(${backgroundImg})`}}>
+            <form className="login-form" onSubmit={handleLogin}>
+                <h2>Login</h2>
+                <div className="form-group">
+                    <label htmlFor="userName">Username</label>
+                    <input
+                        type="text"
+                        id="userName"
+                        name="userName"
+                        value={loginForm.userName}
+                        onChange={handleInputChange}
+                        required
+                    />
                 </div>
-                <div style={{ position: 'absolute', bottom: '40px', width: '100%', textAlign: 'center', color: '#666' }}>
-                    Copyright ©2024 | Hao Xu (許昊)
+                <div className="form-group">
+                    <label htmlFor="passWord">Password</label>
+                    <input
+                        type="password"
+                        id="passWord"
+                        name="passWord"
+                        value={loginForm.passWord}
+                        onChange={handleInputChange}
+                        required
+                    />
                 </div>
-            </div>
+                {/* 这里应该是拖拽验证码组件，我们用一个按钮模拟 */}
+                <button type="button" onClick={handleCaptchaSuccess}>
+                    {loginForm.dragSuccess ? 'Verified' : 'Drag to verify'}
+                </button>
+                <button type="submit">Login</button>
+            </form>
         </div>
     );
 };

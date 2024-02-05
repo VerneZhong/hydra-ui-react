@@ -1,21 +1,23 @@
 import React from 'react';
 import Login from './components/Login'
+import logo from './assets/images/login-bg.png';
 
 function App() {
-  return (
-      <div className="App">
-          <header className="App-header">
-              {/* 可以在这里放置一些全局的头部内容 */}
-          </header>
-          {/* 主要内容区域，引入Login组件 */}
-          <main>
-              <Login />
-          </main>
-          <footer>
-              {/* 如有需要，这里可以放置全局底部内容 */}
-          </footer>
-      </div>
-  );
+    return (
+        <div className="App">
+            <main className="main">
+                <div className="login-box">
+                    <img src={logo} alt="Company Logo" className="login-logo"/>
+                    <h2 className="login-title">Pandora management</h2>
+                    <Login/>
+                </div>
+            </main>
+            <footer className="footer">
+                Copyright ©2024 | Hao Xu (許昊)
+            </footer>
+        </div>
+
+    );
 }
 
 export default App;

@@ -1,71 +1,60 @@
-/* 视图盒子 */
-.view-box{}
-
-/*  */
-.bg-fox {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    /*background-color: #fafeff;*/
-    /*background-color: #f8f8ff;*/
-    background-color: rgb(250, 254, 255);
-    pointer-events: none;
-}
-.for-box{
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
+.login-container {
     display: flex;
     align-items: center;
+    justify-content: center;
+    height: 100vh; /* Viewport height */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.login-box{
-    flex: 1;
-}
-.login-box-2{
-    width: 450px;
-    max-width: 90vw;
-    margin: auto;
-    padding-bottom: 100px;
-}
-
-/* 表单 */
-.from-box{padding: 45px 50px 25px; background-color: #e2effc; border: 1px #e5e5e5 solid;}
-.from-box{ border-radius: 1px; /*box-shadow: 1px 1px 2px #666;*/}
-.from-title{font-size: 24px; color: #000; margin-bottom: 30px; text-align: center; position: relative; left: -15px;}
-
-.logo{width: 50px; height: 50px; vertical-align: middle; margin-right: 15px;}
-
-/*动画*/
-.bg-fox>div{animation: changes 30s 0.2s linear infinite alternate; }  /* normal | alternate */
-@keyframes changes {
-    from {transform: translate(0, 0vh);}
-    to {transform: translate(0, 15vh);}
+.login-form {
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 300px;
+    box-sizing: border-box;
 }
 
-.sjx {
-    width: 0;
-    height: 0;
-    border-left: 100px solid transparent;
-    border-right: 100px solid transparent;
-    border-bottom: 180px solid #dee7f8;
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
-/* 2px圆角 */
-.view-box >>> .el-input__inner,
-.view-box >>> .el-button{border-radius: 2px !important;}
+.form-group {
+    margin-bottom: 1rem;
+}
 
-/* 渐渐显示的动画 */
-.from-box{
-    opacity: 0;
-    transition: opacity 1s;
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
 }
-.from-box-show{
-    opacity: 1;
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
-.show-pwd{
-    position: absolute;
-    left: 320px;
-    font-size: 20px;
+
+.form-group button {
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.form-group button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Add hover effects on buttons if desired */
+.form-group button:hover:not(:disabled) {
+    background-color: #0056b3;
 }
